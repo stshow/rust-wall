@@ -29,6 +29,7 @@ struct BingResponse {
 #[derive(Debug, Deserialize)]
 struct BingImage {
     url: String,
+    urlbase: String,
     startdate: String,
     copyright: String,
 }
@@ -78,7 +79,7 @@ async fn main() -> Result<()> {
     let mut skipped = 0;
     
     for image in response.images {
-        let image_url = format!("https://www.bing.com{}", image.url);
+        let image_url = format!("https://www.bing.com{}_{}.jpg", image.urlbase, "UHD");
         let filename = format!(
             "bing_{}_{}.jpg",
             image.startdate,
